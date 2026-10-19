@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LaneController;
 use Illuminate\Support\Facades\Route;
 
 // Гость
@@ -20,4 +21,10 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+});
+
+Route::middleware('admin')->group(function () {
+    Route::resource('lanes', LaneController::class);
+    Route::post('/lanes/{lane}/archive', [LaneController::class, 'archive'])
+    ->name('lanes.archive');
 });

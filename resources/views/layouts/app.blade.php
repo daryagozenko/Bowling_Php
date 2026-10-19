@@ -78,6 +78,9 @@
         </div>
         <div>
             @auth
+                @if (auth()->user()->role === 'admin')
+                <a href="{{ route('lanes.index') }}">Дорожки</a>
+                @endif
                 <span style="margin-right: 1rem;">{{ auth()->user()->name }} ({{ auth()->user()->role }})</span>
                 <form method="POST" action="{{ route('logout') }}" style="display: inline;">
                     @csrf
