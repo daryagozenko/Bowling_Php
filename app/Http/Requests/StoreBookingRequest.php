@@ -23,7 +23,7 @@ class StoreBookingRequest extends FormRequest
         return [
             'user_id' => ['required', 'integer', 'exists:users,id'],
             'lane_id' => ['required', 'integer', 'exists:lanes,id'],
-            'start_time' => ['required', 'date'],
+            'start_time' => ['required', 'date', 'after:now'],
             'end_time' => ['required', 'date', 'after:start_time'],
         ];
     }
